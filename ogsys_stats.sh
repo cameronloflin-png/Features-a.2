@@ -56,7 +56,7 @@ touch disk.html
     # 2. The output should use ascii characters for any tree formatting
     {
     lsblk -o NAME,SIZE,TYPE -a --ascii 
-   } > System_Stats/block_dev
+   } > block_dev
 
     {
   lsblk -o NAME,SIZE,TYPE,TRAN --ascii | grep 'sata'
