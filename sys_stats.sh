@@ -20,7 +20,7 @@ touch kernel.txt
     sudo lshw -html > lshw.html 
     # 4. The operating system
     lscpu
-    } > System_Stats/kernel
+    } > kernel
 
 
 # Output the following information to a file called network
@@ -29,7 +29,7 @@ touch network.txt
     # 2. All network interfaces
     {
     netstat
-    } > System_Stats/network
+    } > network
     
 # Output the following information to a file called disk.html
 touch disk.html
@@ -48,7 +48,7 @@ touch disk.html
   lscpu | head -n 5
   echo
   lscpu | tail -n 12
-} > Systems_Stats/cpu
+} > cpu
 
 
 # Output the following information to a file called block_dev
@@ -64,7 +64,7 @@ touch disk.html
   for dev in $(lsblk -d -o NAME,TRAN | awk '$2 == "sata" {print $1}'); do
     udevadm info --query=all --name="/dev/$dev"
   done
-} > System_Stats/sata
+} > sata
 
     
     
