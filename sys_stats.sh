@@ -5,23 +5,40 @@
 #************************************#
 
 # Make a directory called System_Stats and change directories to that directory
+mkdir System_Stats
+cd System_Stats || exit
 # Try to make the output for each file look as neat and organized as you can.
 
 # Output the following information to a file called kernel
+touch kernel.txt
     # 1. Kernel Name
+   {
+    uname
     # 2. Kernel Release
+    sudo lshw -short
     # 3. Kernel Version
+    sudo lshw -html > lshw.html 
     # 4. The operating system
+    lscpu
+    } > System_Stats/kernel
 
 
 # Output the following information to a file called network
+touch network.txt
     # 1. Do not print any serial numbers or sensitive information related to the system
     # 2. All network interfaces
-    
+    {
+    netstat
+    } > System_Stats/network
     
 # Output the following information to a file called disk.html
+touch disk.html
     # 1. All disks
+    {
+    df -h
+    } > disk.html
     # 2. The output should include html tags, i.e. <html></html>
+    
 
 
 # Output the following information to a file called cpu
@@ -48,5 +65,12 @@
     udevadm info --query=all --name="/dev/$dev"
   done
 } > System_Stats/sata
+
+    
+    
+
+
+
+
 
     
