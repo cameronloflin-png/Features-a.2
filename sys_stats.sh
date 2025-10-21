@@ -27,14 +27,26 @@
 # Output the following information to a file called cpu
     # 1. The first five lines of the command lscpu
     # 2. The last 12 lines of the command lscpu
-    
+  {  
+  lscpu | head -n 5
+  echo
+  lscpu | tail -n 12
+} > Systems_Stats/cpu
+
 
 # Output the following information to a file called block_dev
     # 1. Only the name, size, and type of the block devices
     # 2. The output should use ascii characters for any tree formatting
-    
-    
-# Output the following information to a file called sata
-    # 1. Any Sata devices connected to the machine along with human readable sizes of the devices
-    # 2. More specific information about each device that is connected to the machine
+    {
+    lsblk -o NAME,SIZE,TYPE -a --ascii 
+   } > System_Stats/block_dev
+
+    {
+  lsblk -o NAME,SIZE,TYPE,TRAN --ascii | grep 'sata'
+
+  for dev in $(lsblk -d -o NAME,TRAN | awk '$2 == "sata" {print $1}'); do
+    udevadm info --query=all --name="/dev/$dev"
+  done
+} > System_Stats/sata
+
     
