@@ -18,24 +18,8 @@ cd System_Stats || exit
 
 # Output network info
 {
-  echo "Network Interfaces:"
-  echo "==================="
-
-  ip -brief address
-
-  echo
-  echo "Interface Details (sanitized):"
-  echo "=============================="
-
-  for iface in $(ls /sys/class/net); do
-    echo "Interface: $iface"
-    cat /sys/class/net/"$iface"/operstate
-    cat /sys/class/net/"$iface"/mtu
-    echo
-  done
-} > network.txt
-
-
+lshw -class network -short | grep -vE 'serial|configuration|capacity' > network.txt
+}
 
 # Output disk info
 {
