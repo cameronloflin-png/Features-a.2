@@ -10,10 +10,14 @@ cd System_Stats || exit
 
 # Output kernel info
 {
-  uname
-  sudo lshw -short
-  sudo lshw -html > lshw.html
-  lscpu
+ {
+  echo "Kernel Name:     $(uname -s)"
+  echo "Kernel Release:  $(uname -r)"
+  echo "Kernel Version:  $(uname -v)"
+  echo "Operating System: $(uname -o 2>/dev/null || grep '^PRETTY_NAME' /etc/os-release | cut -d= -f2 | tr -d '\"')"
+} > "$output_file"
+
+
 } > kernel.txt
 
 # Output network info
